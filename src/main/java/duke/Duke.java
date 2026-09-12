@@ -1,18 +1,23 @@
 package duke;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String DATA_FILE_PATH = "data" + File.separator + "duke.txt";
+
     public static void main(String[] args) {
         printGreeting();
-        ArrayList<Task> tasks = new ArrayList<>();
+        Storage storage = new Storage(DATA_FILE_PATH);
+        ArrayList<Task> tasks = storage.load();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
             try {
                 runCommand(input, tasks);
+                storage.save(tasks);
             } catch (DukeExceptions e) {
                 printError(e.getMessage());
             } catch (NumberFormatException e) {
