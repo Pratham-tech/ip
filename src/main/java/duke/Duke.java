@@ -37,6 +37,10 @@ public class Duke {
             Task t = getTaskByCommand(tasks, input, "unmark ");
             t.unmarkAsDone();
             printStatusChange("OK, I've marked this task as not done yet:", t);
+        } else if (input.startsWith("delete ")) {
+            Task t = getTaskByCommand(tasks, input, "delete ");
+            tasks.remove(t);
+            printDeletedTask(t, tasks.size());
         } else if (input.equals("todo") || input.startsWith("todo ")) {
             addTask(tasks, parseTodo(input));
         } else if (input.equals("deadline") || input.startsWith("deadline ")) {
@@ -131,5 +135,12 @@ public class Duke {
     /** Prints an error message to the user, prefixed consistently. */
     private static void printError(String message) {
         System.out.println("OOPS!!! " + message);
+    }
+
+    /** Prints the confirmation shown after a task is deleted. */
+    private static void printDeletedTask(Task t, int totalTasks) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + t);
+        System.out.println("Now you have " + totalTasks + " tasks in the list.");
     }
 }
