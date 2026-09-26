@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -59,5 +60,12 @@ public class Ui {
 
     public void showLoadingError() {
         System.out.println("OOPS!!! Could not load saved tasks; starting with an empty list.");
+    }
+
+    public void showMatchingTasks(ArrayList<Task> matches) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < matches.size(); i++) {
+            System.out.println((i + 1) + "." + matches.get(i));
+        }
     }
 }
