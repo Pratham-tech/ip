@@ -60,6 +60,9 @@ public class Duke {
             Task t = Parser.parseEvent(input);
             tasks.add(t);
             ui.showAddedTask(t, tasks.size());
+        } else if (input.startsWith("find ")) {
+            String keyword = input.substring(5).trim();
+            ui.showMatchingTasks(tasks.find(keyword));
         } else {
             throw new DukeExceptions("I'm sorry, but I don't know what that means :-(");
         }
