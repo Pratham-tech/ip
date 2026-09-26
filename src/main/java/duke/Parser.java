@@ -5,7 +5,13 @@ package duke;
  * needed to create tasks or identify which task a command refers to.
  */
 public class Parser {
-
+    /**
+     * Parses a todo command into a Todo task.
+     *
+     * @param input The full "todo ..." command.
+     * @return The parsed Todo task.
+     * @throws DukeExceptions If the description is empty.
+     */
     public static Todo parseTodo(String input) throws DukeExceptions {
         String description = input.length() > 4 ? input.substring(5).trim() : "";
         if (description.isEmpty()) {
@@ -13,7 +19,13 @@ public class Parser {
         }
         return new Todo(description);
     }
-
+    /**
+     * Parses a deadline command into a Deadline task.
+     *
+     * @param input The full "deadline ..." command.
+     * @return The parsed Deadline task.
+     * @throws DukeExceptions If the description is empty.
+     */
     public static Deadline parseDeadline(String input) throws DukeExceptions {
         String remainder = input.length() > 8 ? input.substring(9).trim() : "";
         if (remainder.isEmpty()) {
@@ -27,6 +39,13 @@ public class Parser {
         return new Deadline(parts[0].trim(), parts[1].trim());
     }
 
+    /**
+     * Parses an event command into an Event task.
+     *
+     * @param input The full "event ..." command.
+     * @return The parsed Event task.
+     * @throws DukeExceptions If the description is empty.
+     */
     public static Event parseEvent(String input) throws DukeExceptions {
         String remainder = input.length() > 5 ? input.substring(6).trim() : "";
         if (remainder.isEmpty()) {

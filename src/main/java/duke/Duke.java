@@ -2,17 +2,25 @@ package duke;
 
 import java.io.File;
 
+/**
+ * The main Duke chatbot: coordinates the UI, storage, task list, and parser.
+ */
 public class Duke {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Creates a Duke instance, loading any previously saved tasks.
+     *
+     * @param filePath Path to the data file to load from and save to.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
     }
-
+    /** Runs the main command loop until the user types "bye". */
     public void run() {
         ui.showGreeting();
         String input = ui.readCommand();
@@ -67,7 +75,11 @@ public class Duke {
             throw new DukeExceptions("I'm sorry, but I don't know what that means :-(");
         }
     }
-
+    /**
+     * Starts the application.
+     *
+     * @param args Not used.
+     */
     public static void main(String[] args) {
         new Duke("data" + File.separator + "duke.txt").run();
     }
